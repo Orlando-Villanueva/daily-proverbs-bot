@@ -2,8 +2,6 @@ import os
 import random
 import tweepy
 import requests
-import schedule
-import time
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -46,18 +44,5 @@ def post_tweet():
     except Exception as e:
         print(f"Error posting tweet: {e}")
 
-# New function to run the scheduled job
-def run_scheduled_job():
-    print("Running scheduled job...")
-    post_tweet()
-
 if __name__ == "__main__":
-    # Schedule the job to run daily at 8 AM
-    schedule.every().day.at("08:00").do(run_scheduled_job)
-    
-    print("Bot started. Tweets will be posted daily at 8 AM.")
-    
-    # Keep the script running
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    post_tweet()
