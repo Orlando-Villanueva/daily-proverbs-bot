@@ -13,7 +13,7 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
 - **Python**: The primary programming language used for the bot.
 - **Tweepy**: A Python library for accessing the X API.
 - **Requests**: For fetching Proverbs verses from an external API.
-- **API.Bible**: Used to fetch Proverbs verses. The API is accessed using the `requests` library to make HTTP GET requests.
+- **bible-api.com**: A free JSON API for retrieving Bible verses and passages.
 
 ## Getting Started
 
