@@ -37,7 +37,7 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
 
 3. Install the required packages:
     ```
-    pip install -r requirements.txt
+    pip install tweepy requests python-dotenv
     ```
 
 5. Create a .env file in the root directory and add your X API credentials:
