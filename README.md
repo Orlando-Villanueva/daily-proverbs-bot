@@ -1,4 +1,4 @@
-# Daily Proverbs Bot
+# Daily Proverbs Bot for X
 
 A Python-based bot that posts daily verses from the Book of Proverbs on X (formerly Twitter). This bot is designed to share wisdom and inspiration through automated tweets, helping users reflect on meaningful verses each day.
 
@@ -7,15 +7,13 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
 - **Daily Verse Posting**: Automatically posts a random verse from the Book of Proverbs at scheduled times.
 - **Customizable Schedule**: Easily modify the posting schedule to fit your needs.
 - **Environment Variables**: Uses a `.env` file to securely manage API credentials.
-- **Error Handling**: Includes error handling to manage potential issues with posting.
 
 ## Technologies Used
 
 - **Python**: The primary programming language used for the bot.
 - **Tweepy**: A Python library for accessing the X API.
 - **Requests**: For fetching Proverbs verses from an external API.
-- **Schedule**: A Python library for scheduling tasks.
-- **PythonAnywhere**: Hosting platform for running the bot continuously.
+- **API.Bible**: Used to fetch Proverbs verses. The API is accessed using the `requests` library to make HTTP GET requests.
 
 ## Getting Started
 
