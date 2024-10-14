@@ -5,7 +5,6 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
 ## Features
 
 - **Daily Verse Posting**: Automatically posts a random verse from the Book of Proverbs at scheduled times.
-- **Customizable Schedule**: Easily modify the posting schedule to fit your needs.
 - **Environment Variables**: Uses a `.env` file to securely manage API credentials.
 
 ## Technologies Used
