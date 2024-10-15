@@ -31,7 +31,7 @@ def get_proverb():
     # Get a random verse from the chapter
     verses = data['verses']
     verse = random.choice(verses)
-    verse['text'] = verse['text'].replace('\n', ' ').strip()  # Remove newlines and extra spaces
+    verse['text'] = verse['text'].replace('\n', ' ').replace('  ', ' ').strip()  # Remove newlines and extra spaces
     
     return f"Proverbs {chapter}:{verse['verse']} ({TRANSLATION})\n{verse['text']}"
 
