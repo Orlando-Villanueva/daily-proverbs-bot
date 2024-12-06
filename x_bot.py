@@ -36,8 +36,8 @@ def get_proverb():
 def post_tweet():
     proverb = get_proverb()
     try:
-        # tweet = client.create_tweet(text=proverb)
-        # print(f"Tweet posted successfully: {tweet.data['id']}")
+        tweet = client.create_tweet(text=proverb)
+        print(f"Tweet posted successfully: {tweet.data['id']}")
         print(f"Tweet content: {proverb}")
     except Exception as e:
         print(f"Error posting tweet: {e}")
