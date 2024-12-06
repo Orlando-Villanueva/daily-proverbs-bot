@@ -3,6 +3,7 @@ import random
 import tweepy
 import requests
 from dotenv import load_dotenv
+from config import PROVERBS_VERSES, TRANSLATION
 
 load_dotenv()
 
@@ -21,25 +22,22 @@ client = tweepy.Client(
 )
 
 def get_proverb():
-    # Get a random Proverbs chapter (1-31)
-    chapter = random.randint(1, 31)
-    TRANSLATION = "KJV"
-    url = f"https://bible-api.com/proverbs+{chapter}?translation={TRANSLATION}"
+    # Select a random chapter and verse
+    chapter, verse_num = random.choice(PROVERBS_VERSES)
+    
+    # Fetch only the selected verse
+    url = f"https://bible-api.com/proverbs+{chapter}:{verse_num}?translation={TRANSLATION}"
     response = requests.get(url)
     data = response.json()
     
-    # Get a random verse from the chapter
-    verses = data['verses']
-    verse = random.choice(verses)
-    verse['text'] = verse['text'].replace('\n', ' ').replace('  ', ' ').strip()  # Remove newlines and extra spaces
-    
-    return f"Proverbs {chapter}:{verse['verse']} ({TRANSLATION})\n{verse['text']}"
+    verse_text = data['text'].replace('\n', ' ').replace('  ', ' ').strip()
+    return f"Proverbs {chapter}:{verse_num} ({TRANSLATION})\n{verse_text}"
 
 def post_tweet():
     proverb = get_proverb()
     try:
-        tweet = client.create_tweet(text=proverb)
-        print(f"Tweet posted successfully: {tweet.data['id']}")
+        # tweet = client.create_tweet(text=proverb)
+        # print(f"Tweet posted successfully: {tweet.data['id']}")
         print(f"Tweet content: {proverb}")
     except Exception as e:
         print(f"Error posting tweet: {e}")
