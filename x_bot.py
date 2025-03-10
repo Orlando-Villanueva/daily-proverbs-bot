@@ -2,6 +2,8 @@ import os
 import random
 import tweepy
 import requests
+import schedule
+import time
 from dotenv import load_dotenv
 from config import PROVERBS_VERSES, TRANSLATION
 
@@ -43,4 +45,20 @@ def post_tweet():
         print(f"Error posting tweet: {e}")
 
 if __name__ == "__main__":
-    post_tweet()
+    # Option 1: Run once and exit (current behavior)
+    if os.getenv("RUN_ONCE", "true").lower() == "true":
+        post_tweet()
+    # Option 2: Run on a schedule
+    else:
+        # Post immediately on startup
+        post_tweet()
+        
+        # Schedule daily posts at 8:00 AM
+        schedule.every().day.at("08:00").do(post_tweet)
+        
+        print("Bot started. Scheduled to post daily at 08:00.")
+        
+        # Keep the script running
+        while True:
+            schedule.run_pending()
+            time.sleep(60)  # Check every minute

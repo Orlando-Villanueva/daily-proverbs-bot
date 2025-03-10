@@ -13,6 +13,7 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
 - **Tweepy**: A Python library for accessing the X API.
 - **Requests**: For fetching Proverbs verses from an external API.
 - **bible-api.com**: A free JSON API for retrieving Bible verses and passages.
+- **Schedule** (Optional): A Python library for scheduling tasks within the script.
 
 ## Getting Started
 
@@ -48,7 +49,16 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
     ACCESS_TOKEN_SECRET=your_access_token_secret
     ```
     
-6. To run the bot locally, execute:
+6. To run the bot locally (one-time post), execute:
     ```
     python x_bot.py
+    ```
+
+7. For scheduled operation (if not using PythonAnywhere's scheduler), install the schedule package:
+    ```
+    pip install schedule
+    ```
+    Then set the RUN_ONCE environment variable to "false" in your .env file:
+    ```
+    RUN_ONCE=false
     ```
