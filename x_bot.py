@@ -44,6 +44,12 @@ def post_tweet():
         print(f"Error posting tweet: {e}")
 
 if __name__ == "__main__":
+    # Debug credentials
+    print(f"API_KEY exists: {API_KEY is not None}")
+    print(f"API_SECRET exists: {API_SECRET is not None}")  
+    print(f"ACCESS_TOKEN exists: {ACCESS_TOKEN is not None}")
+    print(f"ACCESS_TOKEN_SECRET exists: {ACCESS_TOKEN_SECRET is not None}")
+    
     # Always run once and exit - scheduling is handled by Replit Scheduled Deployments
     post_tweet()
     print("Tweet posted. Job complete.")
