@@ -1,18 +1,6 @@
-
 [project]
-name = "daily-proverbs-bot"
+name = "repl-nix-workspace"
 version = "0.1.0"
-description = "A Python bot that posts daily verses from Proverbs to X (Twitter)"
+description = "Add your description here"
 requires-python = ">=3.12"
-dependencies = [
-    "tweepy",
-    "requests",
-    "python-dotenv"
-]
-
-[project.optional-dependencies]
-dev = [
-    "pytest",
-    "black",
-    "flake8"
-]
+dependencies = []
