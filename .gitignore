@@ -1,2 +1,17 @@
 .env
 venv/
+# Environment variables
+.env
+
+# Python virtual environment
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE files
+.idea/
+.vscode/
+
+# System files
+.DS_Store
