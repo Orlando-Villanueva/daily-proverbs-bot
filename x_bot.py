@@ -2,14 +2,13 @@ import os
 import random
 import tweepy
 import requests
-import schedule
-import time
 from dotenv import load_dotenv
 from config import PROVERBS_VERSES, TRANSLATION
 
+# Load environment variables (for local testing)
 load_dotenv()
 
-# X API credentials
+# X API credentials (from Deployment secrets)
 API_KEY = os.getenv("API_KEY")
 API_SECRET = os.getenv("API_SECRET")
 ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
@@ -45,20 +44,6 @@ def post_tweet():
         print(f"Error posting tweet: {e}")
 
 if __name__ == "__main__":
-    # Option 1: Run once and exit (current behavior)
-    if os.getenv("RUN_ONCE", "true").lower() == "true":
-        post_tweet()
-    # Option 2: Run on a schedule
-    else:
-        # Post immediately on startup
-        post_tweet()
-        
-        # Schedule daily posts at 8:00 AM
-        schedule.every().day.at("08:00").do(post_tweet)
-        
-        print("Bot started. Scheduled to post daily at 08:00.")
-        
-        # Keep the script running
-        while True:
-            schedule.run_pending()
-            time.sleep(60)  # Check every minute
+    # Always run once and exit - scheduling is handled by Replit Scheduled Deployments
+    post_tweet()
+    print("Tweet posted. Job complete.")

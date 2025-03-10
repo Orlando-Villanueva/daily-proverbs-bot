@@ -54,11 +54,10 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
     python x_bot.py
     ```
 
-7. For scheduled operation (if not using PythonAnywhere's scheduler), install the schedule package:
-    ```
-    pip install schedule
-    ```
-    Then set the RUN_ONCE environment variable to "false" in your .env file:
-    ```
-    RUN_ONCE=false
+7. For scheduled operation, use Replit's Scheduled Deployments:
+    - Go to the Deployments tab
+    - Select "Scheduled" deployments
+    - Set up your desired schedule (e.g., "Every day at 8 AM")
+    - Use `python x_bot.py` as the run command
+    - Add your API credentials as Deployment secrets
     ```
