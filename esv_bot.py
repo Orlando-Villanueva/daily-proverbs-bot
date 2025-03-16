@@ -38,7 +38,7 @@ def get_esv_proverb():
     data = response.json()
 
     # Clean and format the text
-    text = re.sub('\s+', ' ', data['passages'][0]).strip()
+    text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
     return f"Proverbs {chapter}:{verse_num} (ESV)\n{text}"
 
 if __name__ == "__main__":
