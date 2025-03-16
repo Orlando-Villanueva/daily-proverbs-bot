@@ -43,4 +43,4 @@ PROVERBS_VERSES = [
 ]
 
 # Default translation to use
-TRANSLATION = "KJV" 
+TRANSLATION = "KJV"
