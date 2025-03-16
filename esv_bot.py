@@ -1,4 +1,3 @@
-
 import os
 import random
 import re
@@ -12,6 +11,7 @@ load_dotenv()
 # ESV API settings
 API_KEY = os.getenv("ESV_API_KEY")
 API_URL = 'https://api.esv.org/v3/passage/text/'
+
 
 def get_esv_proverb():
     # Select a random chapter and verse
@@ -29,9 +29,7 @@ def get_esv_proverb():
         'include-passage-references': False
     }
 
-    headers = {
-        'Authorization': f'Token {API_KEY}'
-    }
+    headers = {'Authorization': f'Token {API_KEY}'}
 
     # Make API request
     response = requests.get(API_URL, params=params, headers=headers)
@@ -40,6 +38,7 @@ def get_esv_proverb():
     # Clean and format the text
     text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
     return f"Proverbs {chapter}:{verse_num} (ESV)\n{text}"
+
 
 if __name__ == "__main__":
     # Display the verse
