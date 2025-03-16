@@ -1,4 +1,3 @@
-
 import os
 import random
 import re
@@ -22,9 +21,10 @@ ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 
 # Authenticate with X
 client = tweepy.Client(consumer_key=API_KEY,
-                      consumer_secret=API_SECRET,
-                      access_token=ACCESS_TOKEN,
-                      access_token_secret=ACCESS_TOKEN_SECRET)
+                       consumer_secret=API_SECRET,
+                       access_token=ACCESS_TOKEN,
+                       access_token_secret=ACCESS_TOKEN_SECRET)
+
 
 def get_esv_proverb():
     # Select a random chapter and verse
@@ -52,16 +52,20 @@ def get_esv_proverb():
     text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
     return f"Proverbs {chapter}:{verse_num} (ESV)\n{text}"
 
+
 def post_tweet():
     proverb = get_esv_proverb()
     try:
         tweet = client.create_tweet(text=proverb)
         print(f"Tweet posted successfully: {tweet.data['id']}")
         print(f"Tweet content: {proverb}")
+        return proverb
     except Exception as e:
         print(f"Error posting tweet: {e}")
 
+
 if __name__ == "__main__":
     # Always run once and exit - scheduling is handled by Replit Scheduled Deployments
-    post_tweet()
+    tweet = post_tweet()
     print("Tweet posted. Job complete.")
+    print(tweet)
