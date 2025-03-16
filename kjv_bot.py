@@ -15,24 +15,24 @@ ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 
 # Authenticate with X
-client = tweepy.Client(
-    consumer_key=API_KEY,
-    consumer_secret=API_SECRET,
-    access_token=ACCESS_TOKEN,
-    access_token_secret=ACCESS_TOKEN_SECRET
-)
+client = tweepy.Client(consumer_key=API_KEY,
+                       consumer_secret=API_SECRET,
+                       access_token=ACCESS_TOKEN,
+                       access_token_secret=ACCESS_TOKEN_SECRET)
+
 
 def get_proverb():
     # Select a random chapter and verse
     chapter, verse_num = random.choice(PROVERBS_VERSES)
-    
+
     # Fetch only the selected verse
     url = f"https://bible-api.com/proverbs+{chapter}:{verse_num}?translation={TRANSLATION}"
     response = requests.get(url)
     data = response.json()
-    
+
     verse_text = data['text'].replace('\n', ' ').replace('  ', ' ').strip()
     return f"Proverbs {chapter}:{verse_num} ({TRANSLATION})\n{verse_text}"
+
 
 def post_tweet():
     proverb = get_proverb()
@@ -42,6 +42,7 @@ def post_tweet():
         print(f"Tweet content: {proverb}")
     except Exception as e:
         print(f"Error posting tweet: {e}")
+
 
 if __name__ == "__main__":
     # Always run once and exit - scheduling is handled by Replit Scheduled Deployments
