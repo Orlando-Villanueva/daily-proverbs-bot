@@ -62,7 +62,8 @@ def get_complete_passage(chapter, start_verse):
             start_verse -= 1
 
     # Now look forward for the end of the sentence
-    current_verse = original_verse if 'original_verse' in locals() else start_verse
+    current_verse = original_verse if 'original_verse' in locals(
+    ) else start_verse
     complete_text = ""
     reference = f"Proverbs {chapter}:{start_verse}"
 
@@ -103,8 +104,7 @@ def get_complete_passage(chapter, start_verse):
 
 def get_esv_proverb():
     # Select a random chapter and verse
-    #chapter, verse_num = random.choice(PROVERBS_VERSES)
-    chapter, verse_num = (22, 18)
+    chapter, verse_num = random.choice(PROVERBS_VERSES)
     print(f"Initially selected: Proverbs {chapter}:{verse_num}")
     final_passage = get_complete_passage(chapter, verse_num)
     print(f"Final passage reference: {final_passage.split('\n')[0]}")
