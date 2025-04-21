@@ -39,12 +39,6 @@ def fetch_passage(passage, params=None):
     data = response.json()
     return re.sub(r'\s+', ' ', data['passages'][0]).strip()
 
-# Authenticate with X
-client = tweepy.Client(consumer_key=API_KEY,
-                       consumer_secret=API_SECRET,
-                       access_token=ACCESS_TOKEN,
-                       access_token_secret=ACCESS_TOKEN_SECRET)
-
 
 def get_complete_passage(chapter, start_verse):
     # First, check if we need to look backwards
@@ -104,9 +98,14 @@ def get_esv_proverb():
 def post_tweet():
     proverb = get_esv_proverb()
     try:
-        #tweet = client.create_tweet(text=proverb)
-        #print(f"Tweet posted successfully: {tweet.data['id']}")
-        print(f"Tweet content: {proverb}")
+        # X API credentials (moved here)
+        client = tweepy.Client(consumer_key=API_KEY,
+                               consumer_secret=API_SECRET,
+                               access_token=ACCESS_TOKEN,
+                               access_token_secret=ACCESS_TOKEN_SECRET)
+        tweet = client.create_tweet(text=proverb)
+        print(f"Tweet posted successfully: {tweet.data['id']}")
+        #print(f"Tweet content: {proverb}")
     except Exception as e:
         print(f"Error posting tweet: {e}")
 
