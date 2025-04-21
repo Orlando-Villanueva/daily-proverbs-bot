@@ -31,13 +31,15 @@ CHAPTER_VERSES = {
     29: 27
 }
 
-# Generate verse references using dictionary comprehension
-PROVERBS_VERSES = [
-    (chapter, verse) for chapter, count in CHAPTER_VERSES.items()
-    for verse in range(1, count + 1)
-    if (chapter, verse) not in EXCLUDED_VERSES and (
-        not INCLUDED_VERSES or (chapter, verse) in INCLUDED_VERSES)
-]
+# Generate verse references combining chapter mapping and specific inclusions
+PROVERBS_VERSES = (
+    # Add specifically included verses first
+    INCLUDED_VERSES +
+    # Then add verses from chapter mapping
+    [(chapter, verse) for chapter, count in CHAPTER_VERSES.items()
+     for verse in range(1, count + 1)
+     if (chapter, verse) not in EXCLUDED_VERSES]
+)
 
 # Default translation to use
 TRANSLATION = "KJV"
