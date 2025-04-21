@@ -41,6 +41,9 @@ def fetch_passage(passage, params=None):
 
 
 def get_complete_passage(chapter, start_verse):
+    # Initialize original verse
+    original_verse = start_verse
+
     # First, check if we need to look backwards
     current_verse = start_verse
 
@@ -64,8 +67,11 @@ def get_complete_passage(chapter, start_verse):
     ) else start_verse
     reference = f"Proverbs {chapter}:{start_verse}"
 
+    #Initialize complete_text
+    complete_text = ""
+
     # Check if the text we already have is a complete sentence
-    if text.endswith('.') or text.endswith('?') or text.endswith('!'):
+    if text.endswith(('.', '?', '!', '!”')):
         complete_text = text
     else:
         while current_verse <= CHAPTER_VERSES.get(chapter, 0):
