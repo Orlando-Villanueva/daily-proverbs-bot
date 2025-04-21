@@ -26,31 +26,48 @@ client = tweepy.Client(consumer_key=API_KEY,
                       access_token=ACCESS_TOKEN,
                       access_token_secret=ACCESS_TOKEN_SECRET)
 
+def get_complete_passage(chapter, start_verse):
+    current_verse = start_verse
+    complete_text = ""
+    reference = f"Proverbs {chapter}:{start_verse}"
+    
+    while current_verse <= CHAPTER_VERSES.get(chapter, 0):
+        passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+        
+        params = {
+            'q': passage,
+            'indent-poetry': False,
+            'include-headings': False,
+            'include-footnotes': False,
+            'include-verse-numbers': False,
+            'include-short-copyright': False,
+            'include-passage-references': False
+        }
+        
+        headers = {'Authorization': f'Token {ESV_API_KEY}'}
+        response = requests.get(API_URL, params=params, headers=headers)
+        data = response.json()
+        
+        text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
+        
+        if text.endswith('.'):
+            complete_text = text
+            if current_verse > start_verse:
+                reference = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+            break
+            
+        current_verse += 1
+        if current_verse > CHAPTER_VERSES.get(chapter, 0):
+            # If we reach the end of the chapter, use what we have
+            complete_text = text
+            break
+    
+    return f"{reference} (ESV)\n{complete_text}"
+
 def get_esv_proverb():
     # Select a random chapter and verse
     chapter, verse_num = random.choice(PROVERBS_VERSES)
-    passage = f"Proverbs {chapter}:{verse_num}"
-
-    # Configure API parameters
-    params = {
-        'q': passage,
-        'indent-poetry': False,
-        'include-headings': False,
-        'include-footnotes': False,
-        'include-verse-numbers': False,
-        'include-short-copyright': False,
-        'include-passage-references': False
-    }
-
-    headers = {'Authorization': f'Token {ESV_API_KEY}'}
-
-    # Make API request
-    response = requests.get(API_URL, params=params, headers=headers)
-    data = response.json()
-
-    # Clean and format the text
-    text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
-    return f"Proverbs {chapter}:{verse_num} (ESV)\n{text}"
+    return get_complete_passage(chapter, verse_num)
 
 def post_tweet():
     proverb = get_esv_proverb()
