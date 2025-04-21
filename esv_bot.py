@@ -28,6 +28,38 @@ client = tweepy.Client(consumer_key=API_KEY,
 
 
 def get_complete_passage(chapter, start_verse):
+    # First, check if we need to look backwards
+    current_verse = start_verse
+
+    # Get initial verse to check capitalization
+    passage = f"Proverbs {chapter}:{start_verse}"
+    params = {
+        'q': passage,
+        'indent-poetry': False,
+        'include-headings': False,
+        'include-footnotes': False,
+        'include-verse-numbers': False,
+        'include-short-copyright': False,
+        'include-passage-references': False
+    }
+    headers = {'Authorization': f'Token {ESV_API_KEY}'}
+    response = requests.get(API_URL, params=params, headers=headers)
+    data = response.json()
+    text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
+
+    # If verse starts with lowercase, look backwards
+    if text[0].islower() and start_verse > 1:
+        start_verse -= 1
+        while start_verse >= 1:
+            passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+            response = requests.get(API_URL, params=params, headers=headers)
+            data = response.json()
+            text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
+            if text[0].isupper():
+                break
+            start_verse -= 1
+
+    # Now look forward for the end of the sentence
     current_verse = start_verse
     complete_text = ""
     reference = f"Proverbs {chapter}:{start_verse}"
