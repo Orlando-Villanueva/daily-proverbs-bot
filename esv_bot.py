@@ -40,56 +40,58 @@ def fetch_passage(passage, params=None):
     return re.sub(r'\s+', ' ', data['passages'][0]).strip()
 
 
+def get_initial_verse(chapter, verse):
+    passage = f"Proverbs {chapter}:{verse}"
+    return fetch_passage(passage)
+
+def search_backwards(chapter, start_verse, original_verse):
+    current_verse = start_verse
+    while current_verse >= 1:
+        passage = f"Proverbs {chapter}:{current_verse}-{original_verse}"
+        text = fetch_passage(passage)
+        if text[0].isupper():
+            return text, current_verse
+        current_verse -= 1
+    return text, current_verse
+
+def search_forwards(chapter, start_verse, current_verse):
+    while current_verse <= CHAPTER_VERSES.get(chapter, 0):
+        passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+        text = fetch_passage(passage)
+
+        if text.endswith(('.', '?', '!', '!"')):
+            return text, current_verse
+        current_verse += 1
+
+        if current_verse > CHAPTER_VERSES.get(chapter, 0):
+            return text, current_verse - 1
+    return text, current_verse - 1
+
+def build_reference(chapter, start_verse, end_verse=None):
+    if end_verse and end_verse > start_verse:
+        return f"Proverbs {chapter}:{start_verse}-{end_verse}"
+    return f"Proverbs {chapter}:{start_verse}"
+
 def get_complete_passage(chapter, start_verse):
-    # Initialize original verse
+    # Get initial verse
+    text = get_initial_verse(chapter, start_verse)
     original_verse = start_verse
 
-    # First, check if we need to look backwards
-    current_verse = start_verse
-
-    # Get initial verse to check capitalization
-    passage = f"Proverbs {chapter}:{start_verse}"
-    text = fetch_passage(passage)
-
-    # If verse starts with lowercase, look backwards
+    # Handle lowercase start
     if text[0].islower() and start_verse > 1:
-        original_verse = current_verse
-        start_verse -= 1
-        while start_verse >= 1:
-            passage = f"Proverbs {chapter}:{start_verse}-{original_verse}"
-            text = fetch_passage(passage)
-            if text[0].isupper():
-                break
-            start_verse -= 1
+        text, start_verse = search_backwards(chapter, start_verse - 1, original_verse)
 
-    # Now look forward for the end of the sentence
-    current_verse = original_verse if 'original_verse' in locals(
-    ) else start_verse
-    reference = f"Proverbs {chapter}:{start_verse}"
+    # Check if complete sentence
+    if text.endswith(('.', '?', '!', '!"')):
+        reference = build_reference(chapter, start_verse)
+        return f"{reference} (ESV)\n{text}"
 
-    #Initialize complete_text
-    complete_text = ""
+    # Search forwards if needed
+    current_verse = original_verse if original_verse != start_verse else start_verse
+    text, end_verse = search_forwards(chapter, start_verse, current_verse)
 
-    # Check if the text we already have is a complete sentence
-    if text.endswith(('.', '?', '!', '!”')):
-        complete_text = text
-    else:
-        while current_verse <= CHAPTER_VERSES.get(chapter, 0):
-            passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
-            text = fetch_passage(passage)
-
-            if text.endswith('.') or text.endswith('?') or text.endswith('!'):
-                complete_text = text
-                if current_verse > start_verse:
-                    reference = f"Proverbs {chapter}:{start_verse}-{current_verse}"
-                break
-            current_verse += 1
-            if current_verse > CHAPTER_VERSES.get(chapter, 0):
-                # If we reach the end of the chapter, use what we have
-                complete_text = text
-                break
-
-    return f"{reference} (ESV)\n{complete_text}"
+    reference = build_reference(chapter, start_verse, end_verse)
+    return f"{reference} (ESV)\n{text}"
 
 
 def get_esv_proverb():
