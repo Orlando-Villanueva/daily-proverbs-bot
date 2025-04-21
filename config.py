@@ -6,7 +6,7 @@ EXCLUDED_VERSES = [
 ]
 
 # Specific verses to include (if empty, uses all verses except excluded ones)
-INCLUDED_VERSES = [(1, 7)]
+INCLUDED_VERSES = []
 
 # Dictionary mapping chapters to their verse counts
 CHAPTER_VERSES = {
