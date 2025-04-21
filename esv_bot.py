@@ -49,9 +49,11 @@ def get_complete_passage(chapter, start_verse):
 
     # If verse starts with lowercase, look backwards
     if text[0].islower() and start_verse > 1:
+        original_verse = current_verse
         start_verse -= 1
         while start_verse >= 1:
-            passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+            passage = f"Proverbs {chapter}:{start_verse}-{original_verse}"
+            params['q'] = passage
             response = requests.get(API_URL, params=params, headers=headers)
             data = response.json()
             text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
@@ -60,7 +62,7 @@ def get_complete_passage(chapter, start_verse):
             start_verse -= 1
 
     # Now look forward for the end of the sentence
-    current_verse = start_verse
+    current_verse = original_verse if 'original_verse' in locals() else start_verse
     complete_text = ""
     reference = f"Proverbs {chapter}:{start_verse}"
 
