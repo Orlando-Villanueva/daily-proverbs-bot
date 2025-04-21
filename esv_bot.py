@@ -64,40 +64,29 @@ def get_complete_passage(chapter, start_verse):
     # Now look forward for the end of the sentence
     current_verse = original_verse if 'original_verse' in locals(
     ) else start_verse
-    complete_text = ""
     reference = f"Proverbs {chapter}:{start_verse}"
 
-    while current_verse <= CHAPTER_VERSES.get(chapter, 0):
-        passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+    # Check if the text we already have is a complete sentence
+    if text.endswith('.') or text.endswith('?') or text.endswith('!'):
+        complete_text = text
+    else:
+        while current_verse <= CHAPTER_VERSES.get(chapter, 0):
+            passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+            params['q'] = passage
+            response = requests.get(API_URL, params=params, headers=headers)
+            data = response.json()
+            text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
 
-        params = {
-            'q': passage,
-            'indent-poetry': False,
-            'include-headings': False,
-            'include-footnotes': False,
-            'include-verse-numbers': False,
-            'include-short-copyright': False,
-            'include-passage-references': False
-        }
-
-        headers = {'Authorization': f'Token {ESV_API_KEY}'}
-        response = requests.get(API_URL, params=params, headers=headers)
-        data = response.json()
-
-        text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
-
-        if text.endswith('.') or text.endswith('?') or text.endswith('!'):
-
-            complete_text = text
-            if current_verse > start_verse:
-                reference = f"Proverbs {chapter}:{start_verse}-{current_verse}"
-            break
-
-        current_verse += 1
-        if current_verse > CHAPTER_VERSES.get(chapter, 0):
-            # If we reach the end of the chapter, use what we have
-            complete_text = text
-            break
+            if text.endswith('.') or text.endswith('?') or text.endswith('!'):
+                complete_text = text
+                if current_verse > start_verse:
+                    reference = f"Proverbs {chapter}:{start_verse}-{current_verse}"
+                break
+            current_verse += 1
+            if current_verse > CHAPTER_VERSES.get(chapter, 0):
+                # If we reach the end of the chapter, use what we have
+                complete_text = text
+                break
 
     return f"{reference} (ESV)\n{complete_text}"
 
