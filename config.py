@@ -2,6 +2,7 @@
 EXCLUDED_VERSES = [
     (10, 1),  # Exclude Proverbs 10:1
     (25, 1),  # Exclude Proverbs 25:1
+    (27, 27), # Exclude Proverbs 27:27
 ]
 
 # Specific verses to include (if empty, uses all verses except excluded ones)
