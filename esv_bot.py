@@ -51,7 +51,8 @@ def get_complete_passage(chapter, start_verse):
 
         text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
 
-        if text.endswith('.') or text.endswith('?'):
+        if text.endswith('.') or text.endswith('?') or text.endswith('!'):
+
             complete_text = text
             if current_verse > start_verse:
                 reference = f"Proverbs {chapter}:{start_verse}-{current_verse}"
