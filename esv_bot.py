@@ -14,6 +14,13 @@ load_dotenv()
 ESV_API_KEY = os.getenv("ESV_API_KEY")
 API_URL = 'https://api.esv.org/v3/passage/text/'
 
+# X API credentials
+API_KEY = os.getenv("API_KEY")
+API_SECRET = os.getenv("API_SECRET")
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
+
+
 def fetch_passage(passage, params=None):
     default_params = {
         'q': passage,
@@ -26,17 +33,11 @@ def fetch_passage(passage, params=None):
     }
     if params:
         default_params.update(params)
-    
+
     headers = {'Authorization': f'Token {ESV_API_KEY}'}
     response = requests.get(API_URL, params=default_params, headers=headers)
     data = response.json()
     return re.sub(r'\s+', ' ', data['passages'][0]).strip()
-
-# X API credentials
-API_KEY = os.getenv("API_KEY")
-API_SECRET = os.getenv("API_SECRET")
-ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
-ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 
 # Authenticate with X
 client = tweepy.Client(consumer_key=API_KEY,
