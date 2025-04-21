@@ -14,6 +14,24 @@ load_dotenv()
 ESV_API_KEY = os.getenv("ESV_API_KEY")
 API_URL = 'https://api.esv.org/v3/passage/text/'
 
+def fetch_passage(passage, params=None):
+    default_params = {
+        'q': passage,
+        'indent-poetry': False,
+        'include-headings': False,
+        'include-footnotes': False,
+        'include-verse-numbers': False,
+        'include-short-copyright': False,
+        'include-passage-references': False
+    }
+    if params:
+        default_params.update(params)
+    
+    headers = {'Authorization': f'Token {ESV_API_KEY}'}
+    response = requests.get(API_URL, params=default_params, headers=headers)
+    data = response.json()
+    return re.sub(r'\s+', ' ', data['passages'][0]).strip()
+
 # X API credentials
 API_KEY = os.getenv("API_KEY")
 API_SECRET = os.getenv("API_SECRET")
@@ -33,19 +51,7 @@ def get_complete_passage(chapter, start_verse):
 
     # Get initial verse to check capitalization
     passage = f"Proverbs {chapter}:{start_verse}"
-    params = {
-        'q': passage,
-        'indent-poetry': False,
-        'include-headings': False,
-        'include-footnotes': False,
-        'include-verse-numbers': False,
-        'include-short-copyright': False,
-        'include-passage-references': False
-    }
-    headers = {'Authorization': f'Token {ESV_API_KEY}'}
-    response = requests.get(API_URL, params=params, headers=headers)
-    data = response.json()
-    text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
+    text = fetch_passage(passage)
 
     # If verse starts with lowercase, look backwards
     if text[0].islower() and start_verse > 1:
@@ -53,10 +59,7 @@ def get_complete_passage(chapter, start_verse):
         start_verse -= 1
         while start_verse >= 1:
             passage = f"Proverbs {chapter}:{start_verse}-{original_verse}"
-            params['q'] = passage
-            response = requests.get(API_URL, params=params, headers=headers)
-            data = response.json()
-            text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
+            text = fetch_passage(passage)
             if text[0].isupper():
                 break
             start_verse -= 1
@@ -72,10 +75,7 @@ def get_complete_passage(chapter, start_verse):
     else:
         while current_verse <= CHAPTER_VERSES.get(chapter, 0):
             passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
-            params['q'] = passage
-            response = requests.get(API_URL, params=params, headers=headers)
-            data = response.json()
-            text = re.sub(r'\s+', ' ', data['passages'][0]).strip()
+            text = fetch_passage(passage)
 
             if text.endswith('.') or text.endswith('?') or text.endswith('!'):
                 complete_text = text
