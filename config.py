@@ -1,5 +1,6 @@
 # Verses to exclude (format: (chapter, verse))
 EXCLUDED_VERSES = [
+    (10, 1),  # Exclude Proverbs 10:1
     (25, 1),  # Exclude Proverbs 25:1
 ]
 
