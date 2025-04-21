@@ -5,7 +5,7 @@ EXCLUDED_VERSES = [
 ]
 
 # Specific verses to include (if empty, uses all verses except excluded ones)
-INCLUDED_VERSES = []
+INCLUDED_VERSES = [(1, 7)]
 
 # Dictionary mapping chapters to their verse counts
 CHAPTER_VERSES = {
@@ -38,8 +38,7 @@ PROVERBS_VERSES = (
     # Then add verses from chapter mapping
     [(chapter, verse) for chapter, count in CHAPTER_VERSES.items()
      for verse in range(1, count + 1)
-     if (chapter, verse) not in EXCLUDED_VERSES]
-)
+     if (chapter, verse) not in EXCLUDED_VERSES])
 
 # Default translation to use
 TRANSLATION = "KJV"
