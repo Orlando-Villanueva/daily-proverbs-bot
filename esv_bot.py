@@ -44,6 +44,7 @@ def get_initial_verse(chapter, verse):
     passage = f"Proverbs {chapter}:{verse}"
     return fetch_passage(passage)
 
+
 def search_backwards(chapter, start_verse, original_verse):
     current_verse = start_verse
     while current_verse >= 1:
@@ -53,6 +54,7 @@ def search_backwards(chapter, start_verse, original_verse):
             return text, current_verse
         current_verse -= 1
     return text, current_verse
+
 
 def search_forwards(chapter, start_verse, current_verse):
     while current_verse <= CHAPTER_VERSES.get(chapter, 0):
@@ -67,10 +69,12 @@ def search_forwards(chapter, start_verse, current_verse):
             return text, current_verse - 1
     return text, current_verse - 1
 
+
 def build_reference(chapter, start_verse, end_verse=None):
     if end_verse and end_verse > start_verse:
         return f"Proverbs {chapter}:{start_verse}-{end_verse}"
     return f"Proverbs {chapter}:{start_verse}"
+
 
 def get_complete_passage(chapter, start_verse):
     # Get initial verse
@@ -79,7 +83,8 @@ def get_complete_passage(chapter, start_verse):
 
     # Handle lowercase start
     if text[0].islower() and start_verse > 1:
-        text, start_verse = search_backwards(chapter, start_verse - 1, original_verse)
+        text, start_verse = search_backwards(chapter, start_verse - 1,
+                                             original_verse)
 
     # Check if complete sentence
     if text.endswith(('.', '?', '!', '!"')):
@@ -111,9 +116,9 @@ def post_tweet():
                                consumer_secret=API_SECRET,
                                access_token=ACCESS_TOKEN,
                                access_token_secret=ACCESS_TOKEN_SECRET)
-        tweet = client.create_tweet(text=proverb)
-        print(f"Tweet posted successfully: {tweet.data['id']}")
-        #print(f"Tweet content: {proverb}")
+        #tweet = client.create_tweet(text=proverb)
+        #print(f"Tweet posted successfully: {tweet.data['id']}")
+        print(f"Tweet content: {proverb}")
     except Exception as e:
         print(f"Error posting tweet: {e}")
 
