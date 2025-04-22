@@ -82,8 +82,10 @@ def get_complete_passage(chapter, start_verse):
 
     # Handle lowercase start
     if text[0].islower() and start_verse > 1:
-        text, start_verse = search_backwards(chapter, start_verse - 1,
-                                             original_verse)
+        text, new_start = search_backwards(chapter, start_verse - 1,
+                                         original_verse)
+        if new_start >= 1:  # Only update if valid verse found
+            start_verse = new_start
 
     # Check if complete sentence
     if text.endswith(('.', '?', '!', '!"')):
@@ -91,8 +93,7 @@ def get_complete_passage(chapter, start_verse):
         return f"{reference} (ESV)\n{text}"
 
     # Search forwards if needed
-    current_verse = original_verse if original_verse != start_verse else start_verse
-    text, end_verse = search_forwards(chapter, start_verse, current_verse)
+    text, end_verse = search_forwards(chapter, start_verse, start_verse)
 
     reference = build_reference(chapter, start_verse, end_verse)
     return f"{reference} (ESV)\n{text}"
