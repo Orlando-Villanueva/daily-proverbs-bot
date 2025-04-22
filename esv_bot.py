@@ -60,7 +60,7 @@ def search_forwards(chapter, start_verse, current_verse):
     text = fetch_passage(f"Proverbs {chapter}:{start_verse}-{current_verse}")
 
     while not text.endswith(
-        ('.', '?', '!', '!"')) and current_verse < CHAPTER_VERSES.get(
+        ('.', '?', '!', '!”')) and current_verse < CHAPTER_VERSES.get(
             chapter, 0):
         current_verse += 1
         passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
@@ -76,6 +76,12 @@ def build_reference(chapter, start_verse, end_verse=None):
 
 
 def get_complete_passage(chapter, start_verse):
+    # Special handling for Proverbs 25:6-8
+    if chapter == 25 and start_verse == 6:
+        return "Proverbs 25:6-7a (ESV)\nDo not put yourself forward in the king's presence or stand in the place of the great, for it is better to be told, \"Come up here,\" than to be put lower in the presence of a noble."
+    elif chapter == 25 and start_verse == 7:
+        return "Proverbs 25:7b-8 (ESV)\nWhat your eyes have seen do not hastily bring into court, for what will you do in the end, when your neighbor puts you to shame?"
+
     # Get initial verse
     text = get_initial_verse(chapter, start_verse)
     original_verse = start_verse

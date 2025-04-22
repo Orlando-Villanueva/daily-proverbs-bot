@@ -4,6 +4,12 @@ EXCLUDED_VERSES = [
     (25, 1),  # Exclude Proverbs 25:1
 ]
 
+# Special verses that need custom handling
+SPECIAL_VERSES = [
+    (25, 6),  # First part: Proverbs 25:6-7a
+    (25, 7),  # Second part: Proverbs 25:7b-8
+]
+
 # Specific verses to include (if empty, uses all verses except excluded ones)
 INCLUDED_VERSES = []
 
