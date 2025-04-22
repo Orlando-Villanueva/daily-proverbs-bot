@@ -88,7 +88,7 @@ def get_complete_passage(chapter, start_verse):
             start_verse = new_start
 
     # Check if complete sentence
-    if text.endswith(('.', '?', '!', '!"')):
+    if text.endswith(('.', '?', '!', '!”')):
         reference = build_reference(chapter, start_verse, original_verse)
         return f"{reference} (ESV)\n{text}"
 
