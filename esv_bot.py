@@ -58,14 +58,12 @@ def search_backwards(chapter, start_verse, original_verse):
 
 def search_forwards(chapter, start_verse, current_verse):
     text = fetch_passage(f"Proverbs {chapter}:{start_verse}-{current_verse}")
-
-    while not text.endswith(
-        ('.', '?', '!', '!”', ".”")) and current_verse < CHAPTER_VERSES.get(
-            chapter, 0):
+    
+    while not text.endswith(('.', '?', '!', '!"')) and current_verse < CHAPTER_VERSES.get(chapter, 0):
         current_verse += 1
         passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
         text = fetch_passage(passage)
-
+    
     return text, current_verse
 
 
