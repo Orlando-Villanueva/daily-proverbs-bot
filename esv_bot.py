@@ -77,10 +77,11 @@ def build_reference(chapter, start_verse, end_verse=None):
 
 def get_complete_passage(chapter, start_verse):
     # Special handling for Proverbs 25:6-8
-    if chapter == 25 and start_verse == 6:
-        return "Proverbs 25:6-7a (ESV)\nDo not put yourself forward in the king's presence or stand in the place of the great, for it is better to be told, \"Come up here,\" than to be put lower in the presence of a noble."
-    elif chapter == 25 and start_verse == 7:
-        return "Proverbs 25:7b-8 (ESV)\nWhat your eyes have seen do not hastily bring into court, for what will you do in the end, when your neighbor puts you to shame?"
+    if chapter == 25:
+        if start_verse == 6 or start_verse == 7:
+            return "Proverbs 25:6-7a (ESV)\nDo not put yourself forward in the king's presence or stand in the place of the great, for it is better to be told, \"Come up here,\" than to be put lower in the presence of a noble."
+        elif start_verse == 8:
+            return "Proverbs 25:7b-8 (ESV)\nWhat your eyes have seen do not hastily bring into court, for what will you do in the end, when your neighbor puts you to shame?"
 
     # Get initial verse
     text = get_initial_verse(chapter, start_verse)
