@@ -58,12 +58,14 @@ def search_backwards(chapter, start_verse, original_verse):
 
 def search_forwards(chapter, start_verse, current_verse):
     text = fetch_passage(f"Proverbs {chapter}:{start_verse}-{current_verse}")
-    
-    while not text.endswith(('.', '?', '!', '!"')) and current_verse < CHAPTER_VERSES.get(chapter, 0):
+
+    while not text.endswith(
+        ('.', '?', '!', '!"')) and current_verse < CHAPTER_VERSES.get(
+            chapter, 0):
         current_verse += 1
         passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
         text = fetch_passage(passage)
-    
+
     return text, current_verse
 
 
@@ -99,7 +101,7 @@ def get_complete_passage(chapter, start_verse):
 def get_esv_proverb():
     # Select a random chapter and verse
     chapter, verse_num = random.choice(PROVERBS_VERSES)
-    print(f"Initially selected: Proverbs {chapter}:{verse_num}")
+    print(f"Initially selected: Proverbs {24}:{22}")
     final_passage = get_complete_passage(chapter, verse_num)
     print(f"Final passage reference: {final_passage.split('\n')[0]}")
     return final_passage
