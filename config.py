@@ -1,3 +1,18 @@
+# Verses to exclude (format: (chapter, verse))
+EXCLUDED_VERSES = [
+    (10, 1),  # Exclude Proverbs 10:1
+    (25, 1),  # Exclude Proverbs 25:1
+]
+
+# Special verses that need custom handling
+SPECIAL_VERSES = [
+    (25, 6),  # First part: Proverbs 25:6-7a
+    (25, 7),  # Second part: Proverbs 25:7b-8
+]
+
+# Specific verses to include (if empty, uses all verses except excluded ones)
+INCLUDED_VERSES = []
+
 # Dictionary mapping chapters to their verse counts
 CHAPTER_VERSES = {
     10: 32,
@@ -22,10 +37,14 @@ CHAPTER_VERSES = {
     29: 27
 }
 
-# Generate verse references using dictionary comprehension
-PROVERBS_VERSES = [(chapter, verse)
-                   for chapter, count in CHAPTER_VERSES.items()
-                   for verse in range(1, count + 1)]
+# Generate verse references combining chapter mapping and specific inclusions
+PROVERBS_VERSES = (
+    # Add specifically included verses first
+    INCLUDED_VERSES +
+    # Then add verses from chapter mapping
+    [(chapter, verse) for chapter, count in CHAPTER_VERSES.items()
+     for verse in range(1, count + 1)
+     if (chapter, verse) not in EXCLUDED_VERSES])
 
 # Default translation to use
 TRANSLATION = "KJV"
