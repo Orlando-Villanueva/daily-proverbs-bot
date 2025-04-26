@@ -108,7 +108,7 @@ def get_complete_passage(chapter, start_verse):
 
 def get_esv_proverb():
     # Select a random chapter and verse
-    chapter, verse_num = random.choice(PROVERBS_VERSES)
+    chapter, verse_num = (5, 3)
     print(f"Initially selected: Proverbs {chapter}:{verse_num}")
     final_passage = get_complete_passage(chapter, verse_num)
     print(f"Final passage reference: {final_passage.split('\n')[0]}")
@@ -123,8 +123,8 @@ def post_tweet():
                                consumer_secret=API_SECRET,
                                access_token=ACCESS_TOKEN,
                                access_token_secret=ACCESS_TOKEN_SECRET)
-        tweet = client.create_tweet(text=proverb)
-        print(f"Tweet posted successfully: {tweet.data['id']}")
+        #tweet = client.create_tweet(text=proverb)
+        #print(f"Tweet posted successfully: {tweet.data['id']}")
         print(f"Tweet content: {proverb}")
     except Exception as e:
         print(f"Error posting tweet: {e}")
