@@ -48,27 +48,7 @@ INCLUDED_RANGES = [
 ]
 
 # Dictionary mapping chapters to their verse counts
-CHAPTER_VERSES = {
-    10: 32,
-    11: 31,
-    12: 28,
-    13: 25,
-    14: 35,
-    15: 33,
-    16: 33,
-    17: 28,
-    18: 24,
-    19: 29,
-    20: 30,
-    21: 31,
-    22: 29,
-    24: 34,
-    25: 28,
-    26: 28,
-    27: 27,
-    28: 28,
-    29: 27
-}
+CHAPTER_VERSES = {}
 
 # Verses to exclude (format: (chapter, start_verse, end_verse))
 # For single verses, use the same verse number for start and end
