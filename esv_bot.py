@@ -6,6 +6,7 @@ import requests
 from dotenv import load_dotenv
 from config import PROVERBS_VERSES
 from config import CHAPTER_VERSES
+from config import INCLUDED_RANGES
 
 # Load environment variables
 load_dotenv()
@@ -59,9 +60,13 @@ def search_backwards(chapter, start_verse, original_verse):
 def search_forwards(chapter, start_verse, current_verse):
     text = fetch_passage(f"Proverbs {chapter}:{start_verse}-{current_verse}")
 
-    while not text.endswith(
-        ('.', '?', '!', '!”')) and current_verse < CHAPTER_VERSES.get(
-            chapter, 0):
+    # Find max verse from either CHAPTER_VERSES or INCLUDED_RANGES
+    max_verse = CHAPTER_VERSES.get(chapter, 0)
+    for c, start, end in INCLUDED_RANGES:
+        if c == chapter and end > max_verse:
+            max_verse = end
+
+    while not text.endswith(('.', '?', '!', '!"')) and current_verse < max_verse:
         current_verse += 1
         passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
         text = fetch_passage(passage)
