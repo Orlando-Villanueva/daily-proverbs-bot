@@ -1,9 +1,17 @@
-# Verses to exclude (format: (chapter, verse))
+# Verses to exclude (format: (chapter, start_verse, end_verse))
+# For single verses, use the same verse number for start and end
+EXCLUDED_RANGES = [
+    (10, 1, 1),    # Exclude Proverbs 10:1
+    (23, 3, 3),    # Exclude Proverbs 23:3
+    (23, 29, 35),  # Exclude Proverbs 23:29-35
+    (25, 1, 1),    # Exclude Proverbs 25:1
+]
+
+# Convert ranges to individual verses for processing
 EXCLUDED_VERSES = [
-    (10, 1),  # Exclude Proverbs 10:1
-    (23, 3),  # Exclude Proverbs 23:3
-    (23, 30),  # Exclude Proverbs 23:30
-    (25, 1),  # Exclude Proverbs 25:1
+    (chapter, verse)
+    for chapter, start, end in EXCLUDED_RANGES
+    for verse in range(start, end + 1)
 ]
 
 # Special verses that need custom handling
