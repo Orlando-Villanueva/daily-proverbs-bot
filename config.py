@@ -3,7 +3,8 @@
 EXCLUDED_RANGES = [
     (10, 1, 1),    # Exclude Proverbs 10:1
     (23, 3, 3),    # Exclude Proverbs 23:3
-    (23, 29, 35),  # Exclude Proverbs 23:29-35
+    (23, 28, 30),  # Exclude Proverbs 23:29-30
+    (23, 32, 35),  # Exclude Proverbs 23:32-35
     (25, 1, 1),    # Exclude Proverbs 25:1
 ]
 
