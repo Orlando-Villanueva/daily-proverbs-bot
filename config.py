@@ -8,13 +8,15 @@ INCLUDED_RANGES = [
     (3, 21, 21),  # Proverbs 3:21
     (3, 25, 25),  # Proverbs 3:25
     (3, 27, 35),  # Proverbs 3:27-35
-    (4, 1, 5),  # Proverbs 4:1-5
+    (4, 1, 1),  # Proverbs 4:1
+    (4, 3, 3),  # Proverbs 4:3
+    (4, 5, 5),  # Proverbs 4:5
     (4, 7, 7),  # Proverbs 4:7
     (4, 14, 14),  # Proverbs 4:14
     (4, 18, 19),  # Proverbs 4:18-19
     (4, 23, 27),  # Proverbs 4:23-27
     (5, 1, 1),  # Proverbs 5:1
-    (5, 3, 4),
+    (5, 3, 3),  # Proverbs 5:3
     (5, 15, 15),  # Proverbs 5:15
     (5, 18, 18),  # Proverbs 5:18
     (5, 20, 22),  # Proverbs 5:20-22
