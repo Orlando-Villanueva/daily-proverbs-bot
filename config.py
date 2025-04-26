@@ -1,28 +1,22 @@
 # Verses to exclude (format: (chapter, start_verse, end_verse))
 # For single verses, use the same verse number for start and end
 EXCLUDED_RANGES = [
-    (10, 1, 1),    # Exclude Proverbs 10:1
-    (23, 3, 3),    # Exclude Proverbs 23:3
+    (10, 1, 1),  # Exclude Proverbs 10:1
+    (23, 3, 3),  # Exclude Proverbs 23:3
     (23, 28, 30),  # Exclude Proverbs 23:29-30
     (23, 32, 35),  # Exclude Proverbs 23:32-35
-    (25, 1, 1),    # Exclude Proverbs 25:1
+    (25, 1, 1),  # Exclude Proverbs 25:1
 ]
 
 # Convert ranges to individual verses for processing
-EXCLUDED_VERSES = [
-    (chapter, verse)
-    for chapter, start, end in EXCLUDED_RANGES
-    for verse in range(start, end + 1)
-]
-
-# Special verses that need custom handling
-SPECIAL_VERSES = [
-    (25, 6),  # First part: Proverbs 25:6-7a
-    (25, 7),  # Second part: Proverbs 25:7b-8
-]
+EXCLUDED_VERSES = [(chapter, verse) for chapter, start, end in EXCLUDED_RANGES
+                   for verse in range(start, end + 1)]
 
 # Specific verses to include (if empty, uses all verses except excluded ones)
-INCLUDED_VERSES = []
+INCLUDED_VERSES = [(30, 4), (30, 5), (30, 6), (30, 8), (30, 9), (30, 10),
+                   (30, 11), (30, 12), (30, 13), (30, 14), (31, 3), (31, 4),
+                   (31, 5), (31, 6), (31, 7), (31, 8), (31, 9), (31, 10),
+                   (31, 30)]
 
 # Dictionary mapping chapters to their verse counts
 CHAPTER_VERSES = {
