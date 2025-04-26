@@ -14,7 +14,7 @@ INCLUDED_RANGES = [
     (4, 18, 19),   # Proverbs 4:18-19
     (4, 23, 27),   # Proverbs 4:23-27
     (5, 1, 1),     # Proverbs 5:1
-    (5, 3, 3),     # Proverbs 5:3
+    (5, 3, 4),     # Proverbs 5:3-4
     (5, 15, 15),   # Proverbs 5:15
     (5, 18, 18),   # Proverbs 5:18
     (5, 20, 22),   # Proverbs 5:20-22
