@@ -65,7 +65,7 @@ def build_reference(chapter, start_verse, end_verse=None):
     return f"Proverbs {chapter}:{start_verse}"
 
 
-def get_complete_passage(chapter, start_verse):
+def get_complete_passage(chapter, start_verse, initial_text):
     # Special handling for Proverbs 25:6-8
     if chapter == 25:
         if start_verse == 6:
@@ -73,10 +73,9 @@ def get_complete_passage(chapter, start_verse):
         elif start_verse == 7:
             return "Proverbs 25:7b-8 (ESV)\nWhat your eyes have seen do not hastily bring into court, for what will you do in the end, when your neighbor puts you to shame?"
 
-    # Get initial verse and find its completion
-    text = get_initial_verse(chapter, start_verse)
-    if text.endswith(('.', '?', '!', '!"', '."')):
-        return f"Proverbs {chapter}:{start_verse} (ESV)\n{text}"
+    # Check if verse is complete
+    if initial_text.endswith(('.', '?', '!', '!"', '."')):
+        return f"Proverbs {chapter}:{start_verse} (ESV)\n{initial_text}"
 
     # Search forwards for complete proverb
     text, end_verse = search_forwards(chapter, start_verse, start_verse)
@@ -92,7 +91,7 @@ def get_esv_proverb():
         # Check first actual character after any whitespace
         first_char = next(c for c in verse_text if not c.isspace())
         if first_char.isupper():
-            return get_complete_passage(chapter, verse_num)
+            return get_complete_passage(chapter, verse_num, verse_text)
 
 
 def post_tweet():
