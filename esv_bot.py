@@ -78,7 +78,7 @@ def handle_special_cases(chapter, start_verse):
         #     verse_num: ("Reference", "Text")
         # }
     }
-    
+
     if chapter in special_cases and start_verse in special_cases[chapter]:
         reference, text = special_cases[chapter][start_verse]
         return f"{reference}\n{text}"
@@ -89,7 +89,7 @@ def get_complete_passage(chapter, start_verse, initial_text):
     special_case = handle_special_cases(chapter, start_verse)
     if special_case:
         return special_case
-        
+
     # Check if verse is complete
     if initial_text.endswith(('.', '?', '!', '!"', '."')):
         return f"Proverbs {chapter}:{start_verse} (ESV)\n{initial_text}"
@@ -107,8 +107,22 @@ def get_esv_proverb():
         verse_text = get_initial_verse(chapter, verse_num)
         # Check first actual character after any whitespace
         first_char = next(c for c in verse_text if not c.isspace())
-        if first_char.isupper():
-            return get_complete_passage(chapter, verse_num, verse_text)
+        if not first_char.isupper():
+            continue
+
+        # First check if it's a special case
+        special_case = handle_special_cases(chapter, verse_num)
+        if special_case:
+            return special_case
+
+        # Check if verse is complete (ends with punctuation)
+        if verse_text.endswith(('.', '?', '!', '!"', '."')):
+            return f"Proverbs {chapter}:{verse_num} (ESV)\n{verse_text}"
+
+        # If not complete, try to find the complete passage
+        text, end_verse = search_forwards(chapter, verse_num, verse_num)
+        if text.endswith(('.', '?', '!', '!"', '."')):
+            return f"Proverbs {chapter}:{verse_num}-{end_verse} (ESV)\n{text}"
 
 
 def post_tweet():
