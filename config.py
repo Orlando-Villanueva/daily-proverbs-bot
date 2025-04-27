@@ -101,8 +101,6 @@ PROVERBS_VERSES = (
      if (chapter, verse) not in EXCLUDED_VERSES and
      (chapter, verse) not in INCLUDED_VERSES])
 
-# Default translation to use
-TRANSLATION = "KJV"
 # List of verses that start new proverbs
 PROVERB_START_VERSES = [
     (chapter, verse) for chapter, verse in PROVERBS_VERSES
