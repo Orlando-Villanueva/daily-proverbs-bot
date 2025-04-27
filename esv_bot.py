@@ -84,21 +84,6 @@ def handle_special_cases(chapter, start_verse):
         return f"{reference}\n{text}"
     return None
 
-def get_complete_passage(chapter, start_verse, initial_text):
-    # Check for special cases first
-    special_case = handle_special_cases(chapter, start_verse)
-    if special_case:
-        return special_case
-
-    # Check if verse is complete
-    if initial_text.endswith(('.', '?', '!', '!"', '."')):
-        return f"Proverbs {chapter}:{start_verse} (ESV)\n{initial_text}"
-
-    # Search forwards for complete proverb
-    text, end_verse = search_forwards(chapter, start_verse, start_verse)
-    return f"Proverbs {chapter}:{start_verse}-{end_verse} (ESV)\n{text}"
-
-
 def get_esv_proverb():
     while True:
         # Select a random chapter and verse
