@@ -4,9 +4,7 @@ import re
 import tweepy
 import requests
 from dotenv import load_dotenv
-from config import PROVERBS_VERSES
-from config import CHAPTER_VERSES
-from config import INCLUDED_RANGES
+from config import PROVERB_START_VERSES
 
 # Load environment variables
 load_dotenv()
