@@ -127,9 +127,9 @@ def post_tweet():
                                consumer_secret=API_SECRET,
                                access_token=ACCESS_TOKEN,
                                access_token_secret=ACCESS_TOKEN_SECRET)
-        tweet = client.create_tweet(text=proverb)
-        print(f"Tweet posted successfully: {tweet.data['id']}")
-        print(f"Tweet content: {proverb}")
+        #tweet = client.create_tweet(text=proverb)
+        #print(f"Tweet posted successfully: {tweet.data['id']}")
+        print(proverb)
     except Exception as e:
         print(f"Error posting tweet: {e}")
 
