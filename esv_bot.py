@@ -88,17 +88,18 @@ def get_esv_proverb():
     while True:
         # Select a random chapter and verse
         chapter, verse_num = random.choice(PROVERBS_VERSES)
+        
+        # First check if it's a special case
+        special_case = handle_special_cases(chapter, verse_num)
+        if special_case:
+            return special_case
+            
         # Get initial verse and check if it starts with capital letter
         verse_text = get_initial_verse(chapter, verse_num)
         # Check first actual character after any whitespace
         first_char = next(c for c in verse_text if not c.isspace())
         if not first_char.isupper():
             continue
-
-        # First check if it's a special case
-        special_case = handle_special_cases(chapter, verse_num)
-        if special_case:
-            return special_case
 
         # Check if verse is complete (ends with punctuation)
         if verse_text.endswith(('.', '?', '!', '!"', '."')):
