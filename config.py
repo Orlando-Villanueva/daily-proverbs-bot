@@ -79,8 +79,7 @@ EXCLUDED_RANGES = [
     (22, 17, 21),  # Exclude Proverbs 22:17-21
     (22, 27, 27),  # Exclude Proverbs 22:27
     (23, 5, 5),
-    (24, 32, 32),
-    (26, 25, 26)
+    (24, 32, 32)
 ]
 
 # Convert ranges to individual verses for processing
@@ -100,5 +99,3 @@ PROVERBS_VERSES = (
      for verse in range(1, count + 1)
      if (chapter, verse) not in EXCLUDED_VERSES and
      (chapter, verse) not in INCLUDED_VERSES])
-
-
