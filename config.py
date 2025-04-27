@@ -30,7 +30,7 @@ INCLUDED_RANGES = [
     (6, 30, 30),  # Proverbs 6:30
     (6, 32, 32),  # Proverbs 6:32
     (7, 1, 1),  # Proverbs 7:1
-    (7, 4, 4),  # Proverbs 7:4
+    (7, 4, 5),  # Proverbs 7:4
     (8, 5, 5),  # Proverbs 8:5
     (8, 12, 13),  # Proverbs 8:12-13
     (9, 7, 10),  # Proverbs 9:7-10

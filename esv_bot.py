@@ -114,7 +114,7 @@ def get_complete_passage(chapter, start_verse):
 
 def get_esv_proverb():
     # Select a random chapter and verse
-    chapter, verse_num = (random.choice(PROVERBS_VERSES))
+    chapter, verse_num = (7,4)
     print(f"Initially selected: Proverbs {chapter}:{verse_num}")
     final_passage = get_complete_passage(chapter, verse_num)
     print(f"Final passage reference: {final_passage.split('\n')[0]}")
