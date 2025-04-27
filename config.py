@@ -1,6 +1,7 @@
 # Specific verses to include (format: (chapter, start_verse, end_verse))
 INCLUDED_RANGES = [
     (1, 7, 10),  # Proverbs 1:7-10
+    (1, 20, 20),  # Proverbs 1:20
     (3, 1, 3),  # Proverbs 3:1-3
     (3, 5, 7),  # Proverbs 3:5-7
     (3, 9, 14),  # Proverbs 3:9-14
@@ -67,7 +68,7 @@ CHAPTER_VERSES = {
     26: 28,
     27: 27,
     28: 28,
-    29: 27 
+    29: 27
 }
 
 # Verses to exclude (format: (chapter, start_verse, end_verse))
@@ -77,7 +78,7 @@ EXCLUDED_RANGES = [
     (25, 1, 1),  # Exclude Proverbs 25:1
     (22, 17, 21),  # Exclude Proverbs 22:17-21
     (22, 27, 27),  # Exclude Proverbs 22:27
-    (23, 5, 5), 
+    (23, 5, 5),
     (24, 32, 32)
 ]
 
