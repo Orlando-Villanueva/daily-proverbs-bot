@@ -30,7 +30,7 @@ INCLUDED_RANGES = [
     (6, 30, 30),  # Proverbs 6:30
     (6, 32, 32),  # Proverbs 6:32
     (7, 1, 1),  # Proverbs 7:1
-    (7, 4, 5),  # Proverbs 7:4
+    (7, 4, 4),  # Proverbs 7:4
     (8, 5, 5),  # Proverbs 8:5
     (8, 12, 13),  # Proverbs 8:12-13
     (9, 7, 10),  # Proverbs 9:7-10
@@ -48,7 +48,27 @@ INCLUDED_RANGES = [
 ]
 
 # Dictionary mapping chapters to their verse counts
-CHAPTER_VERSES = {}
+CHAPTER_VERSES = {
+    10: 32,
+    11: 31,
+    12: 28,
+    13: 25,
+    14: 35,
+    15: 33,
+    16: 33,
+    17: 28,
+    18: 24,
+    19: 29,
+    20: 30,
+    21: 31,
+    22: 29,
+    24: 34,
+    25: 28,
+    26: 28,
+    27: 27,
+    28: 28,
+    29: 27 
+}
 
 # Verses to exclude (format: (chapter, start_verse, end_verse))
 # For single verses, use the same verse number for start and end
@@ -57,6 +77,8 @@ EXCLUDED_RANGES = [
     (25, 1, 1),  # Exclude Proverbs 25:1
     (22, 17, 21),  # Exclude Proverbs 22:17-21
     (22, 27, 27),  # Exclude Proverbs 22:27
+    (23, 5, 5), 
+    (24, 32, 32)
 ]
 
 # Convert ranges to individual verses for processing
