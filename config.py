@@ -101,12 +101,4 @@ PROVERBS_VERSES = (
      if (chapter, verse) not in EXCLUDED_VERSES and
      (chapter, verse) not in INCLUDED_VERSES])
 
-# List of verses that start new proverbs
-PROVERB_START_VERSES = [
-    (chapter, verse) for chapter, verse in PROVERBS_VERSES
-    if chapter in CHAPTER_VERSES  # Only include verses from chapter mapping
-] + [
-    (chapter, verse) for chapter, start, end in INCLUDED_RANGES
-    for verse in range(start, end + 1)
-    if verse == start  # Only include first verse of each range
-]
+

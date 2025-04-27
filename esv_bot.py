@@ -4,7 +4,7 @@ import re
 import tweepy
 import requests
 from dotenv import load_dotenv
-from config import PROVERB_START_VERSES
+from config import PROVERBS_VERSES
 
 # Load environment variables
 load_dotenv()
@@ -84,10 +84,15 @@ def get_complete_passage(chapter, start_verse):
 
 
 def get_esv_proverb():
-    # Select a random chapter and verse from proverb starts
-    chapter, verse_num = random.choice(PROVERB_START_VERSES)
-    final_passage = get_complete_passage(chapter, verse_num)
-    return final_passage
+    while True:
+        # Select a random chapter and verse
+        chapter, verse_num = random.choice(PROVERBS_VERSES)
+        # Get initial verse and check if it starts with capital letter
+        verse_text = get_initial_verse(chapter, verse_num)
+        # Check first actual character after any whitespace
+        first_char = next(c for c in verse_text if not c.isspace())
+        if first_char.isupper():
+            return get_complete_passage(chapter, verse_num)
 
 
 def post_tweet():
