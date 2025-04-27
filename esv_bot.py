@@ -65,14 +65,31 @@ def build_reference(chapter, start_verse, end_verse=None):
     return f"Proverbs {chapter}:{start_verse}"
 
 
-def get_complete_passage(chapter, start_verse, initial_text):
-    # Special handling for Proverbs 25:6-8
-    if chapter == 25:
-        if start_verse == 6:
-            return "Proverbs 25:6-7a (ESV)\nDo not put yourself forward in the king's presence or stand in the place of the great, for it is better to be told, \"Come up here,\" than to be put lower in the presence of a noble."
-        elif start_verse == 7:
-            return "Proverbs 25:7b-8 (ESV)\nWhat your eyes have seen do not hastily bring into court, for what will you do in the end, when your neighbor puts you to shame?"
+def handle_special_cases(chapter, start_verse):
+    special_cases = {
+        25: {
+            6: ("Proverbs 25:6-7a (ESV)", 
+                "Do not put yourself forward in the king's presence or stand in the place of the great, for it is better to be told, \"Come up here,\" than to be put lower in the presence of a noble."),
+            7: ("Proverbs 25:7b-8 (ESV)",
+                "What your eyes have seen do not hastily bring into court, for what will you do in the end, when your neighbor puts you to shame?")
+        }
+        # Add more special cases here as needed:
+        # chapter_num: {
+        #     verse_num: ("Reference", "Text")
+        # }
+    }
+    
+    if chapter in special_cases and start_verse in special_cases[chapter]:
+        reference, text = special_cases[chapter][start_verse]
+        return f"{reference}\n{text}"
+    return None
 
+def get_complete_passage(chapter, start_verse, initial_text):
+    # Check for special cases first
+    special_case = handle_special_cases(chapter, start_verse)
+    if special_case:
+        return special_case
+        
     # Check if verse is complete
     if initial_text.endswith(('.', '?', '!', '!"', '."')):
         return f"Proverbs {chapter}:{start_verse} (ESV)\n{initial_text}"
