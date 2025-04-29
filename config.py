@@ -35,12 +35,14 @@ INCLUDED_RANGES = [
     (8, 5, 5),  # Proverbs 8:5
     (8, 12, 13),  # Proverbs 8:12-13
     (9, 7, 10),  # Proverbs 9:7-10
+    (23, 1, 1),  # Proverbs 23:1
+    (23, 4, 4),  # Proverbs 23:4
     (23, 6, 6),  # Proverbs 23:6
     (23, 9, 10),  # Proverbs 23:9-10
     (23, 12, 13),  # Proverbs 23:12-13
-    (23, 17, 18),  # Proverbs 23:17-18
-    (23, 20, 20),  # Proverbs 23:20
+    (23, 17, 20),  # Proverbs 23:17-20
     (23, 22, 24),  # Proverbs 23:22-24
+    (23, 27, 27),  # Proverbs 23:26-27
     (23, 31, 31),  # Proverbs 23:31
     (30, 4, 6),  # Proverbs 30:4-6
     (30, 8, 14),  # Proverbs 30:8-14
@@ -78,7 +80,6 @@ EXCLUDED_RANGES = [
     (25, 1, 1),  # Exclude Proverbs 25:1
     (22, 17, 21),  # Exclude Proverbs 22:17-21
     (22, 27, 27),  # Exclude Proverbs 22:27
-    (23, 5, 5),
     (24, 32, 32)
 ]
 
