@@ -47,7 +47,7 @@ def get_initial_verse(chapter, verse):
 def search_forwards(chapter, start_verse, current_verse):
     text = fetch_passage(f"Proverbs {chapter}:{start_verse}-{current_verse}")
 
-    while not text.endswith(('.', '?', '!', '!"', '."')):
+    while not text.endswith(('.', '?', '!', '!”', '.”')):
         current_verse += 1
         try:
             passage = f"Proverbs {chapter}:{start_verse}-{current_verse}"
