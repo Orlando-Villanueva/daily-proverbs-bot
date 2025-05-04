@@ -111,8 +111,7 @@ def get_esv_proverb():
 
         # If not complete, try to find the complete passage
         text, end_verse = search_forwards(chapter, verse_num, verse_num, verse_text)
-        if text.endswith(('.', '?', '!', '!"', '."')):
-            return f"Proverbs {chapter}:{verse_num}-{end_verse} (ESV)\n{text}"
+        return f"Proverbs {chapter}:{verse_num}-{end_verse} (ESV)\n{text}"
 
 
 def post_tweet():
