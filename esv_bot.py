@@ -44,8 +44,8 @@ def get_initial_verse(chapter, verse):
     return fetch_passage(passage)
 
 
-def search_forwards(chapter, start_verse, current_verse):
-    text = fetch_passage(f"Proverbs {chapter}:{start_verse}-{current_verse}")
+def search_forwards(chapter, start_verse, current_verse, initial_text):
+    text = initial_text
 
     while not text.endswith(('.', '?', '!', '!”', '.”')):
         current_verse += 1
@@ -110,7 +110,7 @@ def get_esv_proverb():
             return f"Proverbs {chapter}:{verse_num} (ESV)\n{verse_text}"
 
         # If not complete, try to find the complete passage
-        text, end_verse = search_forwards(chapter, verse_num, verse_num)
+        text, end_verse = search_forwards(chapter, verse_num, verse_num, verse_text)
         if text.endswith(('.', '?', '!', '!"', '."')):
             return f"Proverbs {chapter}:{verse_num}-{end_verse} (ESV)\n{text}"
 
