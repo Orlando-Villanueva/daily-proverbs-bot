@@ -132,4 +132,3 @@ def post_tweet():
 if __name__ == "__main__":
     # Always run once and exit - scheduling is handled by Replit Scheduled Deployments
     post_tweet()
-    print(len(PROVERBS_VERSES))
