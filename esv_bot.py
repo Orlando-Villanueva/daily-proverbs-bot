@@ -110,7 +110,8 @@ def get_esv_proverb():
             return f"Proverbs {chapter}:{verse_num} (ESV)\n{verse_text}"
 
         # If not complete, try to find the complete passage
-        text, end_verse = search_forwards(chapter, verse_num, verse_num, verse_text)
+        text, end_verse = search_forwards(chapter, verse_num, verse_num,
+                                          verse_text)
         return f"Proverbs {chapter}:{verse_num}-{end_verse} (ESV)\n{text}"
 
 
@@ -131,3 +132,4 @@ def post_tweet():
 if __name__ == "__main__":
     # Always run once and exit - scheduling is handled by Replit Scheduled Deployments
     post_tweet()
+    print(len(PROVERBS_VERSES))
