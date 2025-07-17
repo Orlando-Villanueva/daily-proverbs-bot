@@ -1,0 +1,34 @@
+name: Post Daily Proverb
+
+on:
+  # This schedule runs at minute 0 of hours 1, 3, 9, 11, 13, 15, 17, 19, 21, and 23 UTC.
+  # This corresponds to your requested schedule in EDT (UTC-4).
+  schedule:
+    - cron: '0 1,3,9,11,13,15,17,19,21,23 * * *'
+  
+  # This also allows you to run the job manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the script
+        env:
+          ESV_API_KEY: ${{ secrets.ESV_API_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+        run: python esv_bot.py
