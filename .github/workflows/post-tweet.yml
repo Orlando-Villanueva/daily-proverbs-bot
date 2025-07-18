@@ -4,7 +4,7 @@ on:
   # This schedule runs at minute 0 of hours 1, 3, 9, 11, 13, 15, 17, 19, 21, and 23 UTC.
   # This corresponds to your requested schedule in EDT (UTC-4).
   schedule:
-    - cron: '0 1,3,9,11,13,15,17,19,21,23 * * *'
+    - cron: '30 1,3,9,11,13,15,17,19,21,23 * * *'
   
   # This also allows you to run the job manually from the Actions tab on GitHub.
   workflow_dispatch:
