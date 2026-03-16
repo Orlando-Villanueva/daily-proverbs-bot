@@ -12,23 +12,20 @@ A Python-based bot that posts daily verses from the Book of Proverbs on X (forme
 The bot runs via a GitHub Actions workflow (`.github/workflows/post-tweet.yml`) on the following cron schedule:
 
 ```
-30 1,3,9,11,13,15,17,19,21,23 * * *
+30 11,13,15,17,19,21,23 * * *
 ```
 
-This means the bot posts **at minute :30** of the following UTC hours every day:
+This means the bot posts **7 times a day at minute :30**, at the following UTC hours:
 
-| UTC Time | ET Time (EDT UTC-4 / EST UTC-5) |
-|----------|---------------------------------|
-| 01:30    | 9:30 PM / 8:30 PM (prev day) |
-| 03:30    | 11:30 PM / 10:30 PM (prev day) |
-| 09:30    | 5:30 AM / 4:30 AM |
-| 11:30    | 7:30 AM / 6:30 AM |
-| 13:30    | 9:30 AM / 8:30 AM |
-| 15:30    | 11:30 AM / 10:30 AM |
-| 17:30    | 1:30 PM / 12:30 PM |
-| 19:30    | 3:30 PM / 2:30 PM |
-| 21:30    | 5:30 PM / 4:30 PM |
-| 23:30    | 7:30 PM / 6:30 PM |
+| UTC Time | EDT Time (UTC-4) | EST Time (UTC-5) |
+|----------|-----------------|-----------------|
+| 11:30    | 7:30 AM         | 6:30 AM         |
+| 13:30    | 9:30 AM         | 8:30 AM         |
+| 15:30    | 11:30 AM        | 10:30 AM        |
+| 17:30    | 1:30 PM         | 12:30 PM        |
+| 19:30    | 3:30 PM         | 2:30 PM         |
+| 21:30    | 5:30 PM         | 4:30 PM         |
+| 23:30    | 7:30 PM         | 6:30 PM         |
 
 The workflow can also be triggered manually from the **Actions** tab on GitHub.
 
