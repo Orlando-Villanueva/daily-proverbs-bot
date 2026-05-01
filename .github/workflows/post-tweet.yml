@@ -1,10 +1,10 @@
 name: Post Daily Proverb
 
 on:
-  # This schedule runs at minute 0 of hours 1, 3, 9, 11, 13, 15, 17, 19, 21, and 23 UTC.
-  # This corresponds to your requested schedule in EDT (UTC-4).
+  # This schedule runs at minute 30 of hours 11, 13, 15, 17, 19, 21, and 23 UTC (7 times/day).
+  # This corresponds to 6:30 AM – 6:30 PM EST (UTC-5) / 7:30 AM – 7:30 PM EDT (UTC-4).
   schedule:
-    - cron: '30 1,3,9,11,13,15,17,19,21,23 * * *'
+    - cron: '30 11,13,15,17,19,21,23 * * *'
   
   # This also allows you to run the job manually from the Actions tab on GitHub.
   workflow_dispatch:
